@@ -1,6 +1,7 @@
 import time
 import pandas as pd
 import numpy as np
+from tabulate import tabulate
 
 months = ['january', 'february', 'march', 'april', 'may',
           'june', 'all']
@@ -37,21 +38,21 @@ def get_filters():
     # get user input for month (all, january, february, ... , june)
     valid_selection = False
     while valid_selection is False:
-            month = input("Enter a month January thru June, or 'all':").lower()
+            month = input("Enter a month January thru June, or 'all': ").lower()
             if month in valid_months:
                 valid_selection = True
             else:
-                print("Invalid selection, please retry. Valid selections:")
+                print("Invalid selection, please retry. Valid selections: ")
                 print (valid_months)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     valid_selection = False
     while valid_selection is False:
-        day = input("Enter day, or choose 'all':").lower()
+        day = input("Enter day, or choose 'all': ").lower()
         if day in valid_days:
             valid_selection = True
         else:
-            print("Invalid selection, please retry. Valid selections:")
+            print("Invalid selection, please retry. Valid selections: ")
             print (valid_days)
 
     print('-'*40)
@@ -228,11 +229,14 @@ def user_stats(df):
 def show_data(df):
     """"Displays raw data """
     i = 0
-    see_more = 'y'
-    while see_more == 'y':
-        print(df.iloc[i:i+5])
-        i += 5
-        see_more = input("Would you like to see the next 5 rows? y/n: ").lower()
+    while True:
+        display_data = input("\nWould you like to see next 5 lines of raw data?"
+                             " Enter yes or no.\n")
+        if display_data.lower() != 'yes':
+            break
+        print(tabulate(df.iloc[np.arange(0+i,5+i)], headers ="keys"))
+        i+=5
+
 
 
 def main():
@@ -243,9 +247,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        see_data = input('\nWould you like to see raw data? y/n \n').lower()
-        if see_data == 'y':
-                show_data(df)
+        show_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
