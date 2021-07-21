@@ -9,6 +9,8 @@ This project is used to analyze bikeshare data from the first half of 2017, in t
 
 The program bikeshare_project_submission.py is run from the command line and allows the user to filter the data by city, and then optionally by month or day of week. Then, the program provides descriptive statistics based on these selections.
 
+The program can also output the raw data as a table. 
+
 ### Files used
 1. bikeshare_project_submission.py
 1.
