@@ -145,6 +145,7 @@ def station_stats(df):
 
     # display most frequent combination of start station and end station trip
     df['Start Stop Combo'] = df['Start Station'] + " to " + df['End Station']
+    # create new column by concatenating start & stop stations
     print("{} is the most common start start stop combo."
           .format(df.mode()['Start Stop Combo'][0]))
 
@@ -160,6 +161,12 @@ def trip_duration_stats(df):
 
     # display total travel time
     total_duration_seconds = int(df['Trip Duration'].sum())
+
+    """
+    The following variables and calulations convert the total trip duration
+    provided in seconds, to a more readable 'days, hours, minutes, seconds'
+    format
+    """
 
     total_duration_days = total_duration_seconds // 86400
     remainder_hours = (total_duration_seconds
@@ -204,6 +211,12 @@ def user_stats(df):
         print("User Type data not available for your selection.")
     print('\n \n')
 
+"""
+Gender and birth year data is not provided in all of the data sets.
+The program will attempt to provide these statistics, but if unable,
+it will print an error message indicating that this data is not available
+for the current selection.
+"""
     # Display counts of gender
     try:
          print(df['Gender'].value_counts())
