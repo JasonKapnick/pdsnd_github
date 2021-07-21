@@ -94,8 +94,6 @@ def load_data(city, month, day):
 
     # filter by day of week if applicable
     if day != 'all':
-        days_of_week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
-                        'friday', 'saturday', 'sunday']
         day = days_of_week.index(day)+1
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day]
