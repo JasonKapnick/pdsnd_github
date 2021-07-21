@@ -6,7 +6,7 @@ from tabulate import tabulate
 months = ['january', 'february', 'march', 'april', 'may',
           'june', 'all']
 days_of_week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
-                'friday', 'saturday', 'sunday']
+                'friday', 'saturday', 'sunday', 'all']
 
 
 def get_filters():
@@ -18,12 +18,8 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    ##create lists for valid selections
-    valid_months = ['january', 'february', 'march', 'april', 'may',
-                    'june', 'all']
+    ##create list for valid city selections
     valid_cities = ['chicago', 'new york', 'washington']
-    valid_days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
-                  'friday', 'saturday', 'sunday', 'all']
 
     print('Hi, welcome to my project! Let\'s explore some US bikeshare data!')
     valid_selection = False
@@ -39,21 +35,21 @@ def get_filters():
     valid_selection = False
     while valid_selection is False:
             month = input("Enter a month January thru June, or 'all': ").lower()
-            if month in valid_months:
+            if month in months:
                 valid_selection = True
             else:
                 print("Invalid selection, please retry. Valid selections: ")
-                print (valid_months)
+                print (months)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     valid_selection = False
     while valid_selection is False:
         day = input("Enter day, or choose 'all': ").lower()
-        if day in valid_days:
+        if day in days_of_week:
             valid_selection = True
         else:
             print("Invalid selection, please retry. Valid selections: ")
-            print (valid_days)
+            print (days_of_week)
 
     print('-'*40)
     return city, month, day
