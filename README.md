@@ -2,21 +2,19 @@
 This project was created on July 21, 2021. The initial commit is from my Bikeshare Data Analysis Project, submitted on July 14, 2021.
 
 ### Bikeshare Data Analysis
-Replace the Project Title
+As part of Udacity's Programming for Data Science with Python Nanodegree.
 
 ### Description
 This project is used to analyze bikeshare data from the first half of 2017, in the US cities of New York, Washington, and Chicago.
 
 The program bikeshare_project_submission.py is run from the command line and allows the user to filter the data by city, and then optionally by month or day of week. Then, the program provides descriptive statistics based on these selections.
 
-The program can also output the raw data as a table. 
+The program can also output the raw data as a table.
 
 ### Files used
 1. bikeshare_project_submission.py
-1.
-chicago.csv
-1.
-new_york_city.csv
+1. chicago.csv
+1. new_york_city.csv
 1. washington.csv
 
 
