@@ -1,11 +1,12 @@
 import time
 import pandas as pd
 import numpy as np
+from tabulate import tabulate
 
 months = ['january', 'february', 'march', 'april', 'may',
           'june', 'all']
 days_of_week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
-                'friday', 'saturday', 'sunday']
+                'friday', 'saturday', 'sunday', 'all']
 
 
 def get_filters():
@@ -17,12 +18,8 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    ##create lists for valid selections
-    valid_months = ['january', 'february', 'march', 'april', 'may',
-                    'june', 'all']
+    ##create list for valid city selections
     valid_cities = ['chicago', 'new york', 'washington']
-    valid_days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
-                  'friday', 'saturday', 'sunday', 'all']
 
     print('Hi, welcome to my project! Let\'s explore some US bikeshare data!')
     valid_selection = False
@@ -37,22 +34,22 @@ def get_filters():
     # get user input for month (all, january, february, ... , june)
     valid_selection = False
     while valid_selection is False:
-            month = input("Enter a month January thru June, or 'all':").lower()
-            if month in valid_months:
+            month = input("Enter a month January thru June, or 'all': ").lower()
+            if month in months:
                 valid_selection = True
             else:
-                print("Invalid selection, please retry. Valid selections:")
-                print (valid_months)
+                print("Invalid selection, please retry. Valid selections: ")
+                print (months)
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     valid_selection = False
     while valid_selection is False:
-        day = input("Enter day, or choose 'all':").lower()
-        if day in valid_days:
+        day = input("Enter day, or choose 'all': ").lower()
+        if day in days_of_week:
             valid_selection = True
         else:
-            print("Invalid selection, please retry. Valid selections:")
-            print (valid_days)
+            print("Invalid selection, please retry. Valid selections: ")
+            print (days_of_week)
 
     print('-'*40)
     return city, month, day
@@ -94,8 +91,6 @@ def load_data(city, month, day):
 
     # filter by day of week if applicable
     if day != 'all':
-        days_of_week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
-                        'friday', 'saturday', 'sunday']
         day = days_of_week.index(day)+1
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day]
@@ -243,11 +238,14 @@ for the current selection.
 def show_data(df):
     """"Displays raw data """
     i = 0
-    see_more = 'y'
-    while see_more == 'y':
-        print(df.iloc[i:i+5])
-        i += 5
-        see_more = input("Would you like to see the next 5 rows? y/n: ").lower()
+    while True:
+        display_data = input("\nWould you like to see next 5 lines of raw data?"
+                             " Enter yes or no.\n")
+        if display_data.lower() != 'yes':
+            break
+        print(tabulate(df.iloc[np.arange(0+i,5+i)], headers ="keys"))
+        i+=5
+
 
 
 def main():
@@ -258,9 +256,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        see_data = input('\nWould you like to see raw data? y/n \n').lower()
-        if see_data == 'y':
-                show_data(df)
+        show_data(df)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
